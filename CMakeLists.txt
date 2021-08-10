@@ -62,19 +62,16 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/ext/")
 #####                               #####
 #########################################
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${TOPO_RUNTIME_OUTPUT})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TOPO_RUNTIME_OUTPUT})
-
 add_subdirectory(src)
-add_library(TpCorelib STATIC ${TpCoreFiles})
+add_library(RBECorelib STATIC ${TpCoreFiles})
 
 get_property(ext_include GLOBAL PROPERTY ext_include_property)
 get_property(ext_defs GLOBAL PROPERTY ext_defs_property)
 get_property(ext_lib GLOBAL PROPERTY ext_lib_property)
 
-target_compile_definitions(TpCorelib PUBLIC ${ext_defs})
+target_compile_definitions(RBECorelib PUBLIC ${ext_defs})
 
-target_include_directories(TpCorelib PUBLIC SYSTEM
+target_include_directories(RBECorelib PUBLIC SYSTEM
         ${ext_include}
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/src/TopoLite)
@@ -87,7 +84,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	endif()
 endif()
 
-target_link_libraries(TpCorelib PUBLIC ${ext_lib})
+target_link_libraries(RBECorelib PUBLIC ${ext_lib})
 
 if(NOT ${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME})
     set(TPCORELIB_EXTRA_INCLUDE ${ext_include} PARENT_SCOPE)

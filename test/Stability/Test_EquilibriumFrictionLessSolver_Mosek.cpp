@@ -1,7 +1,6 @@
 #include <catch2/catch.hpp>
 #include <stdio.h>
 #include "Stability/Solver/Equilibrium/EquilibriumFrictionLessSolver_Mosek.h"
-#include "Stability/Solver/Equilibrium/EquilibriumFrictionLessSolver_ConicMosek.h"
 
 TEST_CASE("two squares stacking together: stability"){
     shared_ptr<InputVarList> varList;

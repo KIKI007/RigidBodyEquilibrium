@@ -89,20 +89,24 @@ public:
             return normals[pointID];
         }
         else if(partIDB == partID){
-            return normals[pointID] * (-1.0f);
+            return normals[pointID] * (-1.0);
         }
         return Vector3(0, 0, 0);
     }
 
     void get_norm_fric_for_block(int partID, int pointID, Vector3 &normal, Vector3 &ufric, Vector3 &vfric)
     {
+        // the contact normal points from partA to partB
+        // when considering contact force acting on part A,
+        // the force direction is from partB to part A
+        // therefore, here has a -1.
         normal = getContactNormal(partID, pointID) * (-1.0);
         ufric = Vector3(1, 0, 0).cross(normal);
         if((ufric).norm() < FLOAT_ERROR_SMALL){
             ufric = Vector3(0, 1, 0).cross(normal);
         }
-        ufric /= ufric.norm();
-        vfric = normal.cross(ufric); vfric /= vfric.norm();
+        ufric.normalize();
+        vfric = normal.cross(ufric).normalized();
         return;
     }
 

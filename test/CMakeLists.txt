@@ -17,10 +17,8 @@ set(testTopoFiles ${TestIO}
         ${TestMesh}
         ${TestStabilityFiles})
 
-add_executable(testTopo ${testTopoFiles} Test_Main.cpp)
+add_executable(testRBE Stability/Test_EquilibriumFriction_Mosek.cpp Test_Main.cpp)
 
-target_link_libraries(testTopo PUBLIC Catch2::Catch2)
-target_link_libraries(testTopo PUBLIC TpCorelib)
-ParseAndAddCatchTests(testTopo)
-
-target_compile_definitions(testTopo PUBLIC -DTOPOCREATOR_DATA_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../result/")
+target_link_libraries(testRBE PUBLIC Catch2::Catch2)
+target_link_libraries(testRBE PUBLIC RBECorelib)
+ParseAndAddCatchTests(testRBE)
